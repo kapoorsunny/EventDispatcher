@@ -2,7 +2,7 @@ package org.abhi.dispatcher.service
 
 trait StateModel {
     
-    def getState():STATE
+    def getServiceState():STATE
     def isInState(proposed:STATE):Boolean
     def ensureCurrentState(expectedState:STATE)
 	def enterState(proposed:STATE):STATE

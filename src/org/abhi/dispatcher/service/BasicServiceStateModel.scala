@@ -14,9 +14,8 @@ trait BasicServiceStateModel extends StateModel {
     )
 
 
-  override def getState(): STATE = {
-    state
-  }
+  override def getServiceState(): STATE =   state
+    
   override def isInState(proposed: STATE): Boolean = {
     state == proposed
   }

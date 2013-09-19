@@ -15,12 +15,12 @@ trait BasicServiceOperations extends ServiceOperations {
 
   private def isListener(listener:ServiceStateChangeListener) = listeners.exists(_==listener)
   
-  	override abstract def init(config:Configuration){
-  	  super.init(config)
+  	override abstract def initService(config:Configuration){
+  	  super.initService(config)
   	}
   	
-	override abstract def stop(){
-	 super.stop()
+	override abstract def stopService(){
+	 super.stopService()
 	}
 	
 	override abstract def stopQuietly(){

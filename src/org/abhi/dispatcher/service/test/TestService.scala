@@ -22,14 +22,17 @@ class TestService  extends AbstractService with BasicServiceOperations with Basi
   override def serviceStop(){
     println("Service stoping")
   }
+  def act(){
+    
+  }
 }
 
 object TestService extends TestService{
   def main(args: Array[String]) {
    val config =  new Configuration
    registerServiceListener(new TestServiceStateChangeListener)
-  init(config)
-  start
-  stop
+  initService(config)
+  startService
+  stopService
 }
 }

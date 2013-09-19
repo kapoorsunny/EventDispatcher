@@ -3,8 +3,8 @@ package org.abhi.dispatcher.service
 import org.abhi.dispatcher.config.Configuration
 
 trait ServiceOperations {
-	def init(config:Configuration)
-	def stop()
+	def initService(config:Configuration)
+	def stopService()
 	def stopQuietly()
 	def registerServiceListener(listener:ServiceStateChangeListener)
     def unregisterServiceListener( listener:ServiceStateChangeListener)

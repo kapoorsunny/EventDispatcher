@@ -2,8 +2,9 @@ package org.abhi.dispatcher.service
 
 import java.util.concurrent.atomic.AtomicBoolean
 import org.abhi.dispatcher.config.Configuration
+import scala.actors.Actor
 
-trait AbstractService extends Service with StateModel{
+trait AbstractService extends Actor with Service  with StateModel{
 	
 	var config = new Configuration
 	var startTime:Long=System.currentTimeMillis()	
@@ -13,7 +14,7 @@ trait AbstractService extends Service with StateModel{
     
 //    def name = "AbstractService"  
       
-   def init(conf: Configuration) {
+   def initService(conf: Configuration) {
     if (isInState(STATE.INITED)) return
     stateChangeLock.synchronized {
       if (enterState(STATE.INITED) != STATE.INITED) {
@@ -32,7 +33,7 @@ trait AbstractService extends Service with StateModel{
     }
   }
 
-  def start() {
+  def startService() {
     if (isInState(STATE.STARTED)) return
     stateChangeLock.synchronized {
       if (enterState(STATE.STARTED) != STATE.STARTED)
@@ -52,7 +53,7 @@ trait AbstractService extends Service with StateModel{
     }
   }
 
-  def stop() {
+  def stopService() {
     if (isInState(STATE.STOPPED)) return
     stateChangeLock.synchronized {
       if (enterState(STATE.STOPPED) != STATE.STOPPED) {
@@ -96,12 +97,12 @@ trait AbstractService extends Service with StateModel{
   }
   
   
-  def getServiceState(): STATE = {
-    getState();
+  override def getServiceState(): STATE = {
+	getServiceState
   }
 
   def setConfig(conf: Configuration) {
-    this.config = conf;
+    this.config = conf
   }
   
   def getStartTime():Long={
@@ -109,14 +110,17 @@ trait AbstractService extends Service with StateModel{
 	}
   
  def stopQuietly(){
-   stop()
+   stopService()
  }
   
   @throws(classOf[Exception])
-  def serviceInit(conf: Configuration)
+  protected def serviceInit(conf: Configuration)
   @throws(classOf[Exception])
-  def serviceStart()
+  protected def serviceStart()
 
   @throws(classOf[Exception])
-  def serviceStop()
+  protected def serviceStop()
+  
+
+  
 }
