@@ -1,0 +1,4 @@
+EventDispatcher
+===============
+
+Scala event dispatcher 
